@@ -1,0 +1,9 @@
+[package]
+name = "libtdengine"
+version = "2.0.4"
+authors = ["songtianyi<songtianyi630@@163.com>"]
+build = "build.rs"
+edition = "2018"
+
+[build-dependencies]
+bindgen = "*"
