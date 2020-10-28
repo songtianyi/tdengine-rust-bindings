@@ -48,7 +48,9 @@ cargo +nightly run --example subscribe
   - taos_errno
 
 
-## Test coverage
+## Platform coverage
+This binding has only been tested in following platforms
+
 - CentOS-7 (kernel-3.10.0-957.27.2.el7.x86_64)
 
 let me know if it's running well in your platform or just edit this list.
