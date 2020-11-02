@@ -24,6 +24,7 @@ copy to src folder
 cp /path/to/bindings.rs src/
 ```
 run example `demo` to prepare demo data
+> NOTE. `demo` will drop database 'demo' and create a new one.
 ```
 cargo +nightly run --example demo
 ```
