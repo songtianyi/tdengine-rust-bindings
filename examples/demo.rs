@@ -3,11 +3,10 @@ use libtdengine::utils;
 use std::process;
 
 fn main() {
-    let tde =
-        Tdengine::new("127.0.0.1:6030", "root", "taosdata", "top1", 0).unwrap_or_else(|err| {
-            eprintln!("Can't create Tdengine: {}", err);
-            process::exit(1)
-        });
+    let tde = Tdengine::new("127.0.0.1:6030", "root", "taosdata", "log", 0).unwrap_or_else(|err| {
+        eprintln!("Can't create Tdengine: {}", err);
+        process::exit(1)
+    });
 
     assert_eq!(tde.query("drop database demo").is_ok(), true);
     assert_eq!(tde.query("create database demo").is_ok(), true);
