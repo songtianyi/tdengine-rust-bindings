@@ -19,16 +19,16 @@ Then you find generated `bindings.rs`
 ```
 find . -name "*.rs"
 ```
-copy to src folder
+Copy to src folder
 ```
 cp /path/to/bindings.rs src/
 ```
-run example `demo` to prepare demo data
+Run example `demo` to prepare demo data
 > NOTE. `demo` will drop database 'demo' and create a new one.
 ```
 cargo +nightly run --example demo
 ```
-then run example `subscribe` to test demo subscriber and check outputs
+Then run example `subscribe` to test demo subscriber and check outputs
 ```
 cargo +nightly run --example subscribe
 ```
