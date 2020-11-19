@@ -1,4 +1,4 @@
-use libtdengine::tdengine::Tdengine;
+use libtdengine::tdengine::{clean_up, Tdengine};
 use libtdengine::utils;
 use std::process;
 
@@ -31,4 +31,8 @@ fn main() {
     for row in rows {
         println!("{}", utils::format_row(&row));
     }
+    // drop manually before clean up
+    drop(tde);
+    // cleanup before program exit
+    clean_up();
 }

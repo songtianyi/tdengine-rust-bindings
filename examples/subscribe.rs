@@ -1,5 +1,5 @@
 use libtdengine::subscriber::Subscriber;
-use libtdengine::tdengine::Tdengine;
+use libtdengine::tdengine::{clean_up, Tdengine};
 use std::process;
 
 fn main() {
@@ -16,10 +16,13 @@ fn main() {
             });
 
     loop {
-        let rows = subscriber.consume().unwrap_or_else(|err| {
-            eprintln!("consume exit: {}", err);
-            process::exit(1)
-        });
+        let rows = match subscriber.consume() {
+            Ok(rows) => rows,
+            Err(err) => {
+                eprintln!("consume exit: {}", err);
+                break;
+            }
+        };
 
         // example code
         for row in rows {
@@ -27,4 +30,6 @@ fn main() {
         }
         println!("====================");
     }
+    drop(td);
+    clean_up();
 }

@@ -49,7 +49,7 @@ impl Tdengine {
             loop {
                 let taos_row = taos_fetch_row(taos_res);
                 if taos_row.is_null() {
-                    // chek retcode
+                    // check retcode
                     if taos_errno(taos_res) != 0 {
                         return Err(utils::raw_into_str(taos_errstr(taos_res)));
                     }
@@ -75,8 +75,14 @@ impl Drop for Tdengine {
     fn drop(&mut self) {
         unsafe {
             taos_close(self.conn);
-            taos_cleanup();
+            // we will not do clean up here
         }
+    }
+}
+
+pub fn clean_up() {
+    unsafe {
+        taos_cleanup();
     }
 }
 

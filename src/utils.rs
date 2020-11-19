@@ -53,6 +53,26 @@ impl Field {
         }
     }
 
+    pub fn as_f32(&self) -> f32 {
+        match *self {
+            Field::float(v) => v,
+            _ => {
+                println!("unexpected f32 value {}", self);
+                0.0
+            }
+        }
+    }
+
+    pub fn as_f64(&self) -> f64 {
+        match *self {
+            Field::double(v) => v,
+            _ => {
+                println!("unexpected f64 value {}", self);
+                0.0
+            }
+        }
+    }
+
     pub fn as_string(&self) -> String {
         match &*self {
             Field::string(v) => v.to_string(),
