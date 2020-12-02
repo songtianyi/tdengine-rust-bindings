@@ -32,46 +32,28 @@ impl fmt::Display for Field {
     }
 }
 
+macro_rules! impl_as_fields {
+    ($fn:ident, $pattern:pat => $v:expr, $type:ty) => {
+        pub fn $fn(&self) -> $type {
+            match *self {
+                $pattern => $v,
+                _ => {
+                    println!("unexpected $type value {}", self);
+                    Default::default()
+                }
+            }
+        }
+    };
+}
+
 impl Field {
-    pub fn as_i64(&self) -> i64 {
-        match *self {
-            Field::bigInt(v) => v,
-            _ => {
-                println!("unexpected i64 value {}", self);
-                0
-            }
-        }
-    }
-
-    pub fn as_i32(&self) -> i32 {
-        match *self {
-            Field::normalInt(v) => v,
-            _ => {
-                println!("unexpected i32 value {}", self);
-                0
-            }
-        }
-    }
-
-    pub fn as_f32(&self) -> f32 {
-        match *self {
-            Field::float(v) => v,
-            _ => {
-                println!("unexpected f32 value {}", self);
-                0.0
-            }
-        }
-    }
-
-    pub fn as_f64(&self) -> f64 {
-        match *self {
-            Field::double(v) => v,
-            _ => {
-                println!("unexpected f64 value {}", self);
-                0.0
-            }
-        }
-    }
+    impl_as_fields!(as_i8, Field::tinyInt(v) => v, i8);
+    impl_as_fields!(as_i16, Field::smallInt(v) => v, i16);
+    impl_as_fields!(as_i32, Field::normalInt(v) => v, i32);
+    impl_as_fields!(as_i64, Field::bigInt(v) => v, i64);
+    impl_as_fields!(as_f32, Field::float(v) => v, f32);
+    impl_as_fields!(as_f64, Field::double(v) => v, f64);
+    impl_as_fields!(as_bool, Field::boolType(v) => v, bool);
 
     pub fn as_string(&self) -> String {
         match &*self {
