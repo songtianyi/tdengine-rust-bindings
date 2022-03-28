@@ -449,25 +449,6 @@ extern "C" {
     pub fn taos_unsubscribe(tsub: *mut TAOS_SUB, keepProgress: ::std::os::raw::c_int);
 }
 extern "C" {
-    pub fn taos_open_stream(
-        taos: *mut TAOS,
-        sql: *const ::std::os::raw::c_char,
-        fp: ::std::option::Option<
-            unsafe extern "C" fn(
-                param: *mut ::std::os::raw::c_void,
-                arg1: *mut TAOS_RES,
-                row: TAOS_ROW,
-            ),
-        >,
-        stime: i64,
-        param: *mut ::std::os::raw::c_void,
-        callback: ::std::option::Option<unsafe extern "C" fn(arg1: *mut ::std::os::raw::c_void)>,
-    ) -> *mut TAOS_STREAM;
-}
-extern "C" {
-    pub fn taos_close_stream(tstr: *mut TAOS_STREAM);
-}
-extern "C" {
     pub fn taos_load_table_info(
         taos: *mut TAOS,
         tableNameList: *const ::std::os::raw::c_char,
